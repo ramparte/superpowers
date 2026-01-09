@@ -49,12 +49,33 @@ includes:
 
 | Recipe | Purpose |
 |--------|---------|
+| **`superpowers-full-development-cycle.yaml`** | **Complete end-to-end workflow (recommended)** |
 | `brainstorming.yaml` | Refine ideas into designs with approval gate |
 | `writing-plans.yaml` | Create detailed TDD implementation plans |
 | `executing-plans.yaml` | Batch execution with human checkpoints |
 | `subagent-development.yaml` | Fresh agent per task with two-stage review |
 | `git-worktree-setup.yaml` | Create isolated workspace for feature |
 | `finish-branch.yaml` | Complete branch with merge/PR options |
+
+### Full Development Cycle (Recommended)
+
+The `superpowers-full-development-cycle.yaml` meta-recipe composes all workflows into one end-to-end experience:
+
+```bash
+amplifier run "execute superpowers:recipes/superpowers-full-development-cycle.yaml with feature_name='user-authentication'"
+```
+
+**Flow:**
+```
+Brainstorming → [APPROVE] → Planning → [APPROVE] → Worktree → Implementation → [APPROVE] → Finish
+```
+
+**Approval Gates (3):**
+1. After design - approve before investing in planning
+2. After plan - approve before writing code  
+3. After implementation - choose: merge, PR, keep, or discard
+
+**Error Handling:** Test failures trigger bug-hunter debugging (up to 3 retries), then halt for human decision.
 
 ### Example Usage
 
@@ -136,6 +157,7 @@ superpowers/
 │   ├── philosophy.md            # Core principles
 │   └── instructions.md          # Usage guide
 ├── recipes/
+│   ├── superpowers-full-development-cycle.yaml  # Meta-recipe (recommended)
 │   ├── brainstorming.yaml
 │   ├── writing-plans.yaml
 │   ├── executing-plans.yaml
