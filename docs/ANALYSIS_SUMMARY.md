@@ -58,26 +58,38 @@ These should become **Amplifier recipes**:
 | `using-git-worktrees` | Flow: Check dirs → Verify gitignore → Create → Setup → Verify baseline |
 | `finishing-a-development-branch` | Flow: Verify tests → Present options → Execute → Cleanup |
 
-## Amplifier Advantages Over Superpowers
+## Comparison: Superpowers vs Amplifier
 
-When porting to recipes, we gain:
+Both systems have significant strengths. Here's an honest comparison:
 
 | Feature | Superpowers | Amplifier Recipes |
 |---------|-------------|-------------------|
-| **Resumability** | None - must restart | Checkpoint-based resume |
-| **Human Checkpoints** | Informal ("say 'Ready'") | Formal approval gates |
-| **Context Flow** | Manual passing | Automatic accumulation |
-| **Validation** | Free-form markdown | Schema-checked YAML |
-| **Provider Support** | Claude only | 7+ LLM providers |
+| **Resumability** | Yes - plan file tracks task status, re-run picks up where left off | Yes - formal checkpoint-based resume |
+| **Two-Stage Review** | Yes - spec compliance + code quality, both with loops until approved | Ported from Superpowers |
+| **Human Checkpoints** | Implicit ("say 'Ready'") | Formal approval gates |
+| **Context Flow** | Manual passing via plan file | Automatic accumulation |
+| **Validation** | LLM interprets markdown | Schema-checked YAML |
+| **Provider Support** | Claude Code only | 7+ LLM providers |
 | **Composability** | Implicit skill chaining | Explicit sub-recipes |
 
-## Gap Analysis: What Amplifier Lacks
+### What Superpowers Does Well (preserved in port)
+- **Two-stage review loops** - Spec compliance review, then code quality review, both iterate until approved
+- **Task-based resumability** - Plan file tracks in_progress/completed status
+- **Fresh agent per task** - Prevents context pollution
+- **TDD enforcement** - Strict RED-GREEN-REFACTOR discipline
 
-### High Priority Gaps (to address)
-1. **Enforced TDD Workflow** - No automatic detection of code-before-test
-2. **Git Worktree Management** - No worktree creation/management
-3. **Two-Stage Code Review** - No spec compliance vs quality review separation
-4. **Structured Planning Templates** - No enforced task granularity
+### What Amplifier Adds
+- **Multi-provider support** - Not locked to Claude
+- **Formal approval gates** - Schema-enforced checkpoints
+- **Recipe composition** - Sub-recipes and modular workflows
+
+## Gap Analysis: What Amplifier Lacked (before this port)
+
+### Gaps Addressed by This Port
+1. **Enforced TDD Workflow** - Now in skills/test-driven-development
+2. **Git Worktree Management** - Now in recipes/git-worktree-setup.yaml
+3. **Two-Stage Code Review** - Now in recipes/subagent-development.yaml (spec + quality loops)
+4. **Structured Planning Templates** - Now in recipes/writing-plans.yaml
 
 ### Already Strong in Amplifier
 - Systematic debugging (`bug-hunter` agent)

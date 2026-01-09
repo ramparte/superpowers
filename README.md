@@ -173,13 +173,16 @@ superpowers/
 
 This port adapts obra/superpowers for Amplifier:
 
-| Original | Amplifier Port |
-|----------|---------------|
-| Markdown skills loaded into context | Skills + Recipes with formal structure |
-| Implicit workflow chaining | Declarative YAML recipes |
-| Claude Code only | Multi-provider support |
-| No resumability | Checkpoint-based resumption |
-| Informal human checkpoints | Formal approval gates |
+| Feature | Original Superpowers | Amplifier Port |
+|---------|---------------------|----------------|
+| Format | Markdown skills loaded into context | Skills + Recipes with formal structure |
+| Workflow | Implicit skill chaining | Declarative YAML recipes |
+| Provider | Claude Code only | Multi-provider support |
+| Resumability | Plan file tracks task status | Checkpoint-based resumption |
+| Two-stage review | Spec + quality loops until approved | Preserved from original |
+| Human checkpoints | Implicit ("say 'Ready'") | Formal approval gates |
+
+The original Superpowers already has effective resumability (via task status in plan files) and two-stage review loops. This port preserves those strengths while adding multi-provider support and formal approval gates.
 
 See `docs/ANALYSIS_SUMMARY.md` for the full comparison.
 
