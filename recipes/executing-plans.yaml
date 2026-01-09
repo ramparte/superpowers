@@ -36,7 +36,7 @@ stages:
   - name: "plan-review"
     steps:
       - id: "load-plan"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Load and parse the implementation plan from: {{plan_path}}
 
@@ -51,7 +51,7 @@ stages:
         timeout: 120
 
       - id: "critical-review"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "REVIEW"
         prompt: |
           Critically review this implementation plan:
@@ -96,7 +96,7 @@ stages:
   - name: "batch-execution"
     steps:
       - id: "identify-batch"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           From the plan data, identify the next batch of tasks to execute.
 
@@ -118,7 +118,7 @@ stages:
         timeout: 120
 
       - id: "execute-tasks"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Execute the following batch of tasks from the implementation plan.
 
@@ -157,7 +157,7 @@ stages:
   - name: "batch-report"
     steps:
       - id: "generate-report"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "REVIEW"
         prompt: |
           Generate a batch execution report.
@@ -198,7 +198,7 @@ stages:
         timeout: 180
 
       - id: "check-remaining"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Based on the execution results, determine the plan status.
 
@@ -247,7 +247,7 @@ stages:
   - name: "feedback-and-next"
     steps:
       - id: "apply-feedback"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Review the batch results and apply any feedback from the human review.
 
@@ -269,7 +269,7 @@ stages:
         timeout: 300
 
       - id: "next-steps"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Determine the next steps based on plan status.
@@ -302,7 +302,7 @@ stages:
   - name: "finish"
     steps:
       - id: "verify-completion"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Verify that the implementation plan is fully complete.
 
@@ -322,7 +322,7 @@ stages:
         timeout: 600
 
       - id: "present-finish-options"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           Present the finishing options for this implementation.

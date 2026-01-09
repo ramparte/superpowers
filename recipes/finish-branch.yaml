@@ -44,7 +44,7 @@ stages:
   - name: "verify-and-summarize"
     steps:
       - id: "detect-branch-info"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Detect the current branch and worktree information.
 
@@ -66,7 +66,7 @@ stages:
         timeout: 60
 
       - id: "run-tests"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Run the full test suite for this project.
 
@@ -89,7 +89,7 @@ stages:
         timeout: 600
 
       - id: "summarize-changes"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Summarize the changes made on this branch.
@@ -127,7 +127,7 @@ stages:
   - name: "option-selection"
     steps:
       - id: "present-options"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           Present the finish options to the user based on test results.
@@ -214,7 +214,7 @@ stages:
   - name: "execute-choice"
     steps:
       - id: "determine-choice"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Determine which option the user selected.
 
@@ -242,7 +242,7 @@ stages:
         timeout: 60
 
       - id: "execute-merge"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         condition: "{{user_choice.selected_option}} == 'MERGE' and {{user_choice.option_valid}} == 'true'"
         prompt: |
           Execute MERGE: Fast-forward merge to main.
@@ -271,7 +271,7 @@ stages:
         timeout: 300
 
       - id: "execute-pr"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         condition: "{{user_choice.selected_option}} == 'PR'"
         prompt: |
           Execute PR: Create a pull request.
@@ -307,7 +307,7 @@ stages:
         timeout: 180
 
       - id: "execute-keep"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         condition: "{{user_choice.selected_option}} == 'KEEP'"
         prompt: |
           Execute KEEP: Leave branch as-is.
@@ -330,7 +330,7 @@ stages:
         timeout: 60
 
       - id: "execute-discard"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         condition: "{{user_choice.selected_option}} == 'DISCARD'"
         prompt: |
           Execute DISCARD: Delete branch and worktree.
@@ -356,7 +356,7 @@ stages:
         timeout: 180
 
       - id: "handle-blocked-merge"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         condition: "{{user_choice.selected_option}} == 'MERGE' and {{user_choice.option_valid}} == 'false'"
         mode: "REVIEW"
         prompt: |
@@ -396,7 +396,7 @@ stages:
   - name: "cleanup"
     steps:
       - id: "cleanup-worktree"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Perform cleanup if needed.
 
@@ -419,7 +419,7 @@ stages:
         timeout: 120
 
       - id: "final-summary"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Generate final summary of what was done.

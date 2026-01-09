@@ -47,7 +47,7 @@ stages:
       # Step 1: Load and Parse Implementation Plan
       # -----------------------------------------------------------------------
       - id: "load-plan"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Load the implementation plan from: {{plan_path}}
 
@@ -70,7 +70,7 @@ stages:
         timeout: 180
 
       - id: "validate-tasks"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Validate the extracted tasks before execution begins.
@@ -101,7 +101,7 @@ stages:
       - id: "implement-task"
         foreach: "{{tasks}}"
         as: "current_task"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           SUBAGENT IMPLEMENTATION TASK
           ============================
@@ -152,7 +152,7 @@ stages:
       - id: "spec-compliance-review"
         foreach: "{{task_implementations}}"
         as: "implementation"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "REVIEW"
         prompt: |
           SPEC COMPLIANCE REVIEW
@@ -199,7 +199,7 @@ stages:
       - id: "code-quality-review"
         foreach: "{{spec_reviews}}"
         as: "spec_review"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "REVIEW"
         prompt: |
           CODE QUALITY REVIEW
@@ -256,7 +256,7 @@ stages:
       # Step 5: Task Completion Summary
       # -----------------------------------------------------------------------
       - id: "task-summary"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           TASK EXECUTION SUMMARY
@@ -313,7 +313,7 @@ stages:
   - name: "final-review"
     steps:
       - id: "full-code-review"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "REVIEW"
         prompt: |
           FINAL COMPREHENSIVE CODE REVIEW
@@ -384,7 +384,7 @@ stages:
         timeout: 600
 
       - id: "prepare-approval"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Prepare for human approval checkpoint.
 
@@ -437,7 +437,7 @@ stages:
   - name: "finish"
     steps:
       - id: "verify-tests"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           FINAL VERIFICATION
           ==================
@@ -475,7 +475,7 @@ stages:
         timeout: 600
 
       - id: "present-merge-options"
-        agent: "developer-expertise:zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           IMPLEMENTATION COMPLETE - MERGE OPTIONS

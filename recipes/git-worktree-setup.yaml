@@ -42,7 +42,7 @@ stages:
   - name: "discovery"
     steps:
       - id: "check-existing-dirs"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Check for existing worktree directories in the current project.
 
@@ -60,7 +60,7 @@ stages:
         timeout: 60
 
       - id: "determine-location"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Determine the best location for the new worktree.
 
@@ -99,7 +99,7 @@ stages:
         timeout: 90
 
       - id: "verify-gitignore"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Verify that the worktree directory will be properly git-ignored.
 
@@ -135,7 +135,7 @@ stages:
   - name: "worktree-creation"
     steps:
       - id: "create-worktree"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Create the git worktree for feature development.
 
@@ -181,7 +181,7 @@ stages:
   - name: "project-setup"
     steps:
       - id: "detect-project-type"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Detect the project type(s) in the new worktree and identify setup commands.
 
@@ -215,7 +215,7 @@ stages:
         timeout: 90
 
       - id: "run-setup"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Run the appropriate setup commands in the new worktree.
 
@@ -256,7 +256,7 @@ stages:
   - name: "baseline-verification"
     steps:
       - id: "run-baseline-tests"
-        agent: "modular-builder"
+        agent: "foundation:modular-builder"
         prompt: |
           Run the project's test suite to verify a clean baseline state.
 
@@ -331,7 +331,7 @@ stages:
   - name: "completion"
     steps:
       - id: "generate-report"
-        agent: "git-ops"
+        agent: "foundation:git-ops"
         prompt: |
           Generate a final summary report for the completed worktree setup.
 

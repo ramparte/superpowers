@@ -25,7 +25,7 @@ stages:
   - name: "planning"
     steps:
       - id: "load-design"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Read and analyze the design document at: {{design_path}}
@@ -45,7 +45,7 @@ stages:
         timeout: 300
 
       - id: "analyze-requirements"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Based on this design analysis:
@@ -73,7 +73,7 @@ stages:
         timeout: 300
 
       - id: "create-plan"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           Create a comprehensive implementation plan based on:
@@ -198,7 +198,7 @@ stages:
   - name: "finalization"
     steps:
       - id: "extract-metadata"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           From this design analysis, extract the feature name:
@@ -213,7 +213,7 @@ stages:
         timeout: 60
 
       - id: "save-plan"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         prompt: |
           Save the implementation plan to the filesystem.
 
@@ -232,7 +232,7 @@ stages:
         timeout: 120
 
       - id: "offer-execution"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         prompt: |
           The implementation plan has been saved.
           Plan location: {{saved_plan_path}}

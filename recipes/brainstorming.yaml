@@ -27,7 +27,7 @@ stages:
     steps:
       # Step 1: Understand the current project state
       - id: "understand-context"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Understand the current project context for this brainstorming session.
@@ -52,7 +52,7 @@ stages:
 
       # Step 2: Explore and refine requirements through dialogue
       - id: "explore-requirements"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Based on the project context:
@@ -83,7 +83,7 @@ stages:
 
       # Step 3: Propose multiple approaches with trade-offs
       - id: "explore-approaches"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           Based on the refined requirements from our discussion:
@@ -127,7 +127,7 @@ stages:
 
       # Step 4: Present the full design in digestible sections
       - id: "present-design"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           Create a detailed design based on:
@@ -191,7 +191,7 @@ stages:
     steps:
       # Step 5: Save the validated design to a file
       - id: "save-design"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ARCHITECT"
         prompt: |
           Save the approved design document to the project.
@@ -223,7 +223,7 @@ stages:
 
       # Step 6: Offer handoff to implementation
       - id: "handoff"
-        agent: "zen-architect"
+        agent: "foundation:zen-architect"
         mode: "ANALYZE"
         prompt: |
           Design has been saved to: {{design_file_path}}
